@@ -1,0 +1,62 @@
+1.
+import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Component rendered successfully");
+  }, []);
+
+  const btnClick = () => {
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <button onClick={btnClick}>Click me</button>
+      <p>You clicked {count} times</p>
+    </div>
+  );
+}
+O/P=>
+      Component rendered successfully" will be printed once when the component mounts.
+      Initially, the text will read "You clicked 0 times".
+      When you click the button, the count will increment by 1 each time, so after one click, it will read "You clicked 2 times", then "You clicked 4 times", and so on
+-------------------------------------------------------------------------------------------------------------
+2.
+import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Component rendered successfully");
+  }, []);
+
+  const btnClick = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <button onClick={btnClick}>Click me</button>
+      <p>You clicked {count} times</p>
+    </div>
+  );
+}
+O/p=>
+Expected Window Output:
+Initial Display:
+
+Button: "Click me"
+Paragraph: "You clicked 0 times"
+Console Output:
+
+"Component rendered successfully" is logged once when the component first renders.
+Behavior After Clicking the Button:
+
+When you click the "Click me" button:
+The count state will increase by 1.
+The component will re-render, and the paragraph text will update with the new count value.
