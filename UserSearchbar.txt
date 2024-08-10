@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+
+const App = () => {
+  // Array of users with name and email properties
+  const users = [
+    { name: "Ritik", email: "ritik@ritik.com" },
+    { name: "Mridur", email: "mridur@example.com" },
+    { name: "John Doe", email: "john@example.com" },
+    // Add more users as needed
+  ];
+
+  // State to hold the search query
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filtered users based on search query
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div>
+      <h1>Search Users</h1>
+      <input
+        type="text"
+        placeholder="Search by name..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <ul>
+        {filteredUsers.map((user, index) => (
+          <li key={index}>
+            {user.name} - {user.email}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
