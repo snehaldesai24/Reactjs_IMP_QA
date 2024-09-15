@@ -1,0 +1,24 @@
+import React, { useState } from 'react';
+
+const DisableButtonExample = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  // Handle input change
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  return (
+    <div>
+      <input 
+        type="text" 
+        value={inputValue} 
+        onChange={handleInputChange} 
+        placeholder="Type something..."
+      />
+      <button disabled={!inputValue}>Submit</button>
+    </div>
+  );
+};
+
+export default DisableButtonExample;
