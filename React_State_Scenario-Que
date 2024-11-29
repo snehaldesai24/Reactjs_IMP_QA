@@ -1,0 +1,103 @@
+# React State Scenario based que.
+
+## without setState
+
+import React, { useState } from "react";
+import "./styles.css";
+function App() {
+    const [state, setState] = useState(0);
+    const incrementcount =()=>{
+      state = state + 1;
+        console.log(state);
+    }
+    return(
+            <div>
+               <h1>Counter Application</h1>
+               <button onClick={incrementcount}>Increment Count</button>
+                <p>Count is : {state}</p>
+            </div>      
+    )
+}
+export default App;
+
+Output:=> state is updated but UI is not updated in that case.
+
+---------------==========================================================----------------------------------------
+## using setState
+
+import React, { useState } from "react";
+import "./styles.css";
+function App() {
+    const [state, setState] = useState(0);
+    const incrementcount =()=>{
+        setState(state + 1);  
+        setState(state + 2);  
+        setState(state + 1);  
+        //If you are calling same setstate multiple times in that case react create a 1 queue its maintain all setstate and the last setState value is re-render in the UI.   
+    }
+    return(
+            <div>
+               <h1>Counter Application</h1>
+               <button onClick={incrementcount}>Increment Count</button>
+                <p>Count is : {state}</p>
+            </div>      
+    )
+}
+export default App;
+
+output:=> last setState value should be render first becu setSate = setState will update the state and then it will update the dom(re-rendering the component)
+
+==========================================================--------------------------------------------------
+
+import React, { useState } from "react";
+import "./styles.css";
+function App() {
+    const [state, setState] = useState(0);
+    const incrementcount =()=>{
+        setState(state + 1);  //1
+        console.log(state);  //0  
+    }
+    return(
+            <div>
+               <h1>Counter Application</h1>
+               <button onClick={incrementcount}>Increment Count</button>
+                <p>Count is : {state}</p>
+            </div>      
+    )
+}
+export default App;
+
+Output:=> becu setState is asynchronous fun so that why its take a time execute the console first then the setstate is update the state and the re-render the UI.
+
+--------------------------------==============================================================================----------------------------------------------------
+
+import React, { useState } from "react";
+import "./styles.css";
+function App() {
+    const [state, setState] = useState(0);
+    const incrementcount =()=>{
+        setState((prevState) =>{   //0
+          return prevState + 1;       //1 =>0+1=1
+        });
+      
+      setState((prevState) =>{   //1 =prev
+          return prevState + 1;     //2 =>1+1=2
+        }); 
+      
+      setState((prevState) =>{   //2 = prev
+          return prevState + 1;     //3 = 2+1=3  //---re-render ui with 3
+        }); 
+          
+    }
+    return(
+            <div>
+               <h1>Counter Application</h1>
+               <button onClick={incrementcount}>Increment Count</button>
+                <p>Count is : {state}</p>
+            </div>      
+    )
+}
+export default App;
+
+Output:=> re-render ui with 3
+
