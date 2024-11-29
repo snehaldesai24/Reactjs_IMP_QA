@@ -70,6 +70,7 @@ export default App;
 Output:=> becu setState is asynchronous fun so that why its take a time execute the console first then the setstate is update the state and the re-render the UI.
 
 --------------------------------==============================================================================----------------------------------------------------
+## Using Updater function
 
 import React, { useState } from "react";
 import "./styles.css";
